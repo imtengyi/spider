@@ -10,8 +10,13 @@ class HeadersMiddleware():
     def process_request(self, request, spider):
         user_agent = self.get_random_user_agent()
         request.headers['User-Agent'] = user_agent
-        spider.logger.info(u'User-Agent is : {} {}'.format(
-            request.headers.get('User-Agent'), request))
+        # if "book.qidian.com" in request.url:
+        #     request.headers['Host'] = "book.qidian.com"
+        # elif "a.qidian.com" in request.url:
+        #     request.headers['Host'] = "a.qidian.com"
+        request.headers['Content-Type'] = 'text/plain; charset=utf-8'
+        # spider.logger.info(u'User-Agent is : {} {}'.format(
+        #     request.headers.get('User-Agent'), request))
 
     def get_random_user_agent(self):
         """

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for allitebooks project
+# Scrapy settings for novels project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -10,13 +10,13 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 import os
 
-BOT_NAME = 'allitebooks'
+BOT_NAME = 'novels'
 
-SPIDER_MODULES = ['allitebooks.spiders']
-NEWSPIDER_MODULE = 'allitebooks.spiders'
+SPIDER_MODULES = ['novels.spiders']
+NEWSPIDER_MODULE = 'novels.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'allitebooks (+http://www.yourdomain.com)'
+# USER_AGENT = 'novels (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -27,7 +27,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 0.5
+# DOWNLOAD_DELAY = 2
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
@@ -47,13 +47,13 @@ DOWNLOAD_DELAY = 0.5
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'allitebooks.middlewares.MyCustomSpiderMiddleware': 543,
+#     'novels.middlewares.NovelsSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'allitebooks.middlewares.HeadersMiddleware.HeadersMiddleware': 543,
+    'novels.custom_middleware.HeadersMiddleware.HeadersMiddleware': 543
 }
 
 # Enable or disable extensions
@@ -64,17 +64,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {'allitebooks.pipelines.AllitebooksPipeline': 300}
-
-BASE_DIR = os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-# DATABASE
-DATABASE_DIR = os.path.join(BASE_DIR, 'database')
-SQLITE_FILE = os.path.join(os.path.join(DATABASE_DIR, 'sqlite'), 'books.db')
-SQLITE_TABLE_ALLITEBOOKS = 'allitebooks'
-SQLITE_TABLE_BLAH = 'blah'
-SQLITE_TABLE_TAIWANEBOOK = 'taiwanebook'
+ITEM_PIPELINES = {
+    'novels.pipelines.NovelsPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -96,3 +88,13 @@ SQLITE_TABLE_TAIWANEBOOK = 'taiwanebook'
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+BASE_DIR = os.path.dirname(__file__)
+
+# mongo
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_USERNAME = ""
+MONGODB_PASSWORD = ""
+MONGODB_DB = "owllook"
+MONGODB_COLLECTION = "all_books"
